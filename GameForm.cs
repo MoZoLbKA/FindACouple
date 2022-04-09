@@ -7,6 +7,7 @@ using System.Threading;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Data;
 
 namespace FindACouple
 {
@@ -29,7 +30,7 @@ namespace FindACouple
             };
         }
 
-        int timerCount;
+        double timerCount;
         List<Picture> pictureList = new List<Picture>();
         List<PictureBox> loadPicture;
         int openImages;
@@ -64,8 +65,8 @@ namespace FindACouple
         private void timerForGame_Tick(object sender, EventArgs e)
         {
 
-
-            labelForTime.Text = (++timerCount).ToString();
+            timerCount += 0.1;
+            labelForTime.Text = (timerCount).ToString();
         }
         private void LoadToPictureBoxes()
         {
@@ -154,7 +155,30 @@ namespace FindACouple
 
         private void SaveRecord()
         {
-            Player player = new Player();
+            Player player = new Player(name,surname,timerCount);
+            InsertIntoDataBase(player);
+        }
+
+        private void InsertIntoDataBase(Player player)
+        {
+            try
+            {
+                using (SQLiteConnection con = new SQLiteConnection("Data Source=FindACouple.db;Version=3;"))
+                {
+                    con.Open();
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Rating (name,surname,time ) VALUES " +
+                        "(@Name,@Surname,@Time )", con);
+                    cmd.Parameters.Add("@Name",DbType.String ,50).Value = player.Name;
+                    cmd.Parameters.Add("@Surname", DbType.String, 50).Value = player.Surname;
+                    cmd.Parameters.Add("@Time", DbType.Double).Value = player.Time;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Рейтинг не записан(","Технические шоколадки");
+            }
         }
 
         private void GameForm_Load(object sender, EventArgs e)

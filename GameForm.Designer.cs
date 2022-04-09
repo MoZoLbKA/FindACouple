@@ -181,7 +181,6 @@
             // 
             // timerForGame
             // 
-            this.timerForGame.Interval = 1000;
             this.timerForGame.Tick += new System.EventHandler(this.timerForGame_Tick);
             // 
             // labelInfoTime
@@ -287,7 +286,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(130, 118);
             this.pictureBox4.TabIndex = 0;
             this.pictureBox4.TabStop = false;
-                // 
+            // 
             // panel5
             // 
             this.panel5.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -1019,7 +1018,6 @@
             this.Text = "GameForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
             this.Load += new System.EventHandler(this.GameForm_Load);
-            
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);

@@ -46,10 +46,10 @@ namespace FindACouple
         private void acceptButton_Click(object sender, EventArgs e)
 
         {
-            //if (!nameTextBox.Text.Equals(nameTextBox.Tag) && 
-            //   (!nameTextBox.Text.Equals(""))&& 
-            //   (!surnameTextBox.Text.Equals(surnameTextBox.Tag))&&
-            //   (!surnameTextBox.Text.Equals("")))
+            if (!nameTextBox.Text.Equals(nameTextBox.Tag) &&
+               (!nameTextBox.Text.Equals("")) &&
+               (!surnameTextBox.Text.Equals(surnameTextBox.Tag)) &&
+               (!surnameTextBox.Text.Equals("")))
             {
                 Form gameForm = new GameForm(nameTextBox.Text,surnameTextBox.Text);
                 gameForm.Left = Left;
@@ -57,12 +57,15 @@ namespace FindACouple
                 gameForm.Show();
                 Hide();
             }
-            //else
-            //{
-            //    MessageBox.Show("Вы не ввели данные!", "Предупреждение");
-            //}
+            else
+            {
+                MessageBox.Show("Вы не ввели данные!", "Предупреждение");
+            }
         }
 
-        
+        private void ratingButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

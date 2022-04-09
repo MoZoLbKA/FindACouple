@@ -88,7 +88,6 @@
             this.attentionLabel.TabIndex = 2;
             this.attentionLabel.Text = "Введите имя и фамилию";
             this.attentionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            
             // 
             // acceptButton
             // 
@@ -155,6 +154,7 @@
             this.ratingButton.TabIndex = 7;
             this.ratingButton.Text = "Рейтинг";
             this.ratingButton.UseVisualStyleBackColor = true;
+            this.ratingButton.Click += new System.EventHandler(this.ratingButton_Click);
             // 
             // openFileDialog1
             // 

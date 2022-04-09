@@ -1,13 +1,5 @@
-﻿using System.Data.SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FindACouple
@@ -51,7 +43,7 @@ namespace FindACouple
                (!surnameTextBox.Text.Equals(surnameTextBox.Tag)) &&
                (!surnameTextBox.Text.Equals("")))
             {
-                Form gameForm = new GameForm(nameTextBox.Text,surnameTextBox.Text);
+                Form gameForm = new GameForm(nameTextBox.Text, surnameTextBox.Text);
                 gameForm.Left = Left;
                 gameForm.Top = Top;
                 gameForm.Show();
@@ -65,7 +57,11 @@ namespace FindACouple
 
         private void ratingButton_Click(object sender, EventArgs e)
         {
-
+            Form ratingForm = new Rating();
+            ratingForm.Left = Left;
+            ratingForm.Top = Top;
+            ratingForm.Show();
+            Hide();
         }
     }
 }

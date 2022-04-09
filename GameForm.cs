@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Collections;
-using System.Threading;
 using System.IO;
-using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
-using System.Data;
 
 namespace FindACouple
 {
     public partial class GameForm : Form
-    {       
+    {
         public GameForm(string text1, string text2)
         {
             this.name = text1;
@@ -30,11 +28,11 @@ namespace FindACouple
             };
         }
 
-        double timerCount;
-        List<Picture> pictureList = new List<Picture>();
-        List<PictureBox> loadPicture;
-        int openImages;
-        Predicate<PictureBox> predicate = CheckOpenPictures;
+        private double timerCount;
+        private List<Picture> pictureList = new List<Picture>();
+        private List<PictureBox> loadPicture;
+        private int openImages;
+        private Predicate<PictureBox> predicate = CheckOpenPictures;
         private string name;
         private string surname;
 
@@ -53,7 +51,7 @@ namespace FindACouple
             Random r = new Random();
             int randomInd;
             for (int i = 0; i < pictureList.Count; i++)
-            {         
+            {
                 randomInd = r.Next(pictureList.Count);
                 var tmp = pictureList[i];
                 pictureList[i] = pictureList[randomInd];
@@ -74,21 +72,21 @@ namespace FindACouple
             {
                 loadPicture[i].SizeMode = PictureBoxSizeMode.Normal;
                 loadPicture[i].Image = pictureList[i].Image;
-                loadPicture[i].Tag = pictureList[i].Id;                             
+                loadPicture[i].Tag = pictureList[i].Id;
                 loadPicture[i].Click += new EventHandler(PictureBox_Click);
             }
         }
-        
+
 
         private static bool CheckOpenPictures(PictureBox obj)
         {
-            if(obj.SizeMode == PictureBoxSizeMode.StretchImage)
+            if (obj.SizeMode == PictureBoxSizeMode.StretchImage)
             {
                 return true;
             }
             return false;
         }
-        private bool CheckTags(PictureBox box1,PictureBox box2)
+        private bool CheckTags(PictureBox box1, PictureBox box2)
         {
             if (box1.Tag.Equals(box2.Tag))
             {
@@ -96,7 +94,7 @@ namespace FindACouple
             }
             return false;
         }
-        private void OpenRightImages(PictureBox box1,PictureBox box2)
+        private void OpenRightImages(PictureBox box1, PictureBox box2)
         {
             box1.Click -= PictureBox_Click;
             box2.Click -= PictureBox_Click;
@@ -118,9 +116,9 @@ namespace FindACouple
             box2.SizeMode = PictureBoxSizeMode.Normal;
             openImages = 0;
         }
-        private void PictureBox_Click(object sender,EventArgs e)
+        private void PictureBox_Click(object sender, EventArgs e)
         {
-            
+
             PictureBox cur = sender as PictureBox;
             if (!CheckOpenPictures(cur))
             {
@@ -134,15 +132,15 @@ namespace FindACouple
                 var array = Array.FindAll(loadPicture.ToArray(), predicate);
                 if (CheckTags(array[0], array[1]))
                 {
-                   OpenRightImages(array[0], array[1]);
-                    
+                    OpenRightImages(array[0], array[1]);
+
                 }
                 else
                 {
                     CloseWrongImages(array[0], array[1]);
 
                 }
-                
+
             }
             if (loadPicture.Count == 0)
             {
@@ -155,7 +153,7 @@ namespace FindACouple
 
         private void SaveRecord()
         {
-            Player player = new Player(name,surname,timerCount);
+            Player player = new Player(name, surname, timerCount);
             InsertIntoDataBase(player);
         }
 
@@ -168,7 +166,7 @@ namespace FindACouple
                     con.Open();
                     SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Rating (name,surname,time ) VALUES " +
                         "(@Name,@Surname,@Time )", con);
-                    cmd.Parameters.Add("@Name",DbType.String ,50).Value = player.Name;
+                    cmd.Parameters.Add("@Name", DbType.String, 50).Value = player.Name;
                     cmd.Parameters.Add("@Surname", DbType.String, 50).Value = player.Surname;
                     cmd.Parameters.Add("@Time", DbType.Double).Value = player.Time;
                     cmd.ExecuteNonQuery();
@@ -177,7 +175,7 @@ namespace FindACouple
             }
             catch
             {
-                MessageBox.Show("Рейтинг не записан(","Технические шоколадки");
+                MessageBox.Show("Рейтинг не записан(", "Технические шоколадки");
             }
         }
 

@@ -37,9 +37,6 @@ namespace FindACouple
         {
             try
             {
-
-
-
                 SQLiteConnection con = new SQLiteConnection("Data Source=FindACouple.db;Version=3;");
                 con.Open();
                 SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM rating", con);
@@ -48,7 +45,7 @@ namespace FindACouple
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tableRatingDataGrid.Rows.Add(dr[1].ToString() +" "+dr[2].ToString(), dr[3]);               
+                    tableRatingDataGrid.Rows.Add(dr[1].ToString(), Math.Round((double)dr[2],2));               
                 }
                 con.Close();
             }

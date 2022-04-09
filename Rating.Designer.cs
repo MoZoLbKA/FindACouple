@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Rating));
             this.tableRatingDataGrid = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,12 +46,13 @@
             this.tableRatingDataGrid.AllowUserToResizeRows = false;
             this.tableRatingDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableRatingDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.tableRatingDataGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tableRatingDataGrid.BackgroundColor = System.Drawing.Color.White;
+            this.tableRatingDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableRatingDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical;
             this.tableRatingDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
@@ -69,7 +71,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tableRatingDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.tableRatingDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableRatingDataGrid.GridColor = System.Drawing.SystemColors.Control;
+            this.tableRatingDataGrid.GridColor = System.Drawing.Color.Yellow;
             this.tableRatingDataGrid.Location = new System.Drawing.Point(0, 0);
             this.tableRatingDataGrid.Name = "tableRatingDataGrid";
             this.tableRatingDataGrid.ReadOnly = true;
@@ -102,10 +104,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableRatingDataGrid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Rating";
-            this.Text = "Rating";
+            this.Text = "Find A Couple!";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Rating_FormClosed);
             this.Load += new System.EventHandler(this.Rating_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tableRatingDataGrid)).EndInit();

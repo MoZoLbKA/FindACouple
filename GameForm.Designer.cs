@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.timerForGame = new System.Windows.Forms.Timer(this.components);
             this.labelInfoTime = new System.Windows.Forms.Label();
             this.labelForTime = new System.Windows.Forms.Label();
@@ -186,7 +187,7 @@
             // labelInfoTime
             // 
             this.labelInfoTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelInfoTime.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelInfoTime.Font = new System.Drawing.Font("Impact", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelInfoTime.Location = new System.Drawing.Point(220, 804);
             this.labelInfoTime.Name = "labelInfoTime";
             this.labelInfoTime.Size = new System.Drawing.Size(113, 34);
@@ -196,7 +197,7 @@
             // labelForTime
             // 
             this.labelForTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelForTime.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelForTime.Font = new System.Drawing.Font("Impact", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelForTime.Location = new System.Drawing.Point(339, 804);
             this.labelForTime.Name = "labelForTime";
             this.labelForTime.Size = new System.Drawing.Size(113, 34);
@@ -962,7 +963,7 @@
             // infoLabel
             // 
             this.infoLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.infoLabel.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.infoLabel.Font = new System.Drawing.Font("Impact", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.infoLabel.Location = new System.Drawing.Point(502, 794);
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(300, 54);
@@ -973,6 +974,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(1293, 899);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.labelInfoTime);
@@ -1013,9 +1015,10 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelForTime);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GameForm";
+            this.Text = "Find A Couple!";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.panel1.ResumeLayout(false);

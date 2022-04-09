@@ -39,11 +39,10 @@ namespace FindACouple
 
         {
             if (!nameTextBox.Text.Equals(nameTextBox.Tag) &&
-               (!nameTextBox.Text.Equals("")) &&
-               (!surnameTextBox.Text.Equals(surnameTextBox.Tag)) &&
-               (!surnameTextBox.Text.Equals("")))
+               (!nameTextBox.Text.Equals("")))
+               
             {
-                Form gameForm = new GameForm(nameTextBox.Text, surnameTextBox.Text);
+                Form gameForm = new GameForm(nameTextBox.Text);
                 gameForm.Left = Left;
                 gameForm.Top = Top;
                 gameForm.Show();
@@ -58,6 +57,15 @@ namespace FindACouple
         private void ratingButton_Click(object sender, EventArgs e)
         {
             Form ratingForm = new Rating();
+            ratingForm.Left = Left;
+            ratingForm.Top = Top;
+            ratingForm.Show();
+            Hide();
+        }
+
+        private void infoButton_Click(object sender, EventArgs e)
+        {
+            Form ratingForm = new InfoForm();
             ratingForm.Left = Left;
             ratingForm.Top = Top;
             ratingForm.Show();

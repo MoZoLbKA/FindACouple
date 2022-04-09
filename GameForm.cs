@@ -6,15 +6,16 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Media.Animation;
 
 namespace FindACouple
 {
     public partial class GameForm : Form
     {
-        public GameForm(string text1, string text2)
+        public GameForm(string text1)
         {
             this.name = text1;
-            this.surname = text2;
+            
             InitializeComponent();
             timerForGame.Start();
             openImages = 0;
@@ -34,7 +35,7 @@ namespace FindACouple
         private int openImages;
         private Predicate<PictureBox> predicate = CheckOpenPictures;
         private string name;
-        private string surname;
+        
 
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -106,22 +107,26 @@ namespace FindACouple
         }
         private void CloseWrongImages(PictureBox box1, PictureBox box2)
         {
+            
             box1.BackColor = Color.Red;
             box2.BackColor = Color.Red;
-            Update();
-            Thread.Sleep(1000);
+            Update();            
+            Thread.Sleep(750);
+            
             box1.BackColor = Color.Yellow;
             box2.BackColor = Color.Yellow;
             box1.SizeMode = PictureBoxSizeMode.Normal;
             box2.SizeMode = PictureBoxSizeMode.Normal;
             openImages = 0;
+            
         }
         private void PictureBox_Click(object sender, EventArgs e)
         {
-
+            
             PictureBox cur = sender as PictureBox;
             if (!CheckOpenPictures(cur))
             {
+                
                 cur.BackColor = Color.Yellow;
                 cur.SizeMode = PictureBoxSizeMode.StretchImage;
                 cur.Update();
@@ -146,14 +151,26 @@ namespace FindACouple
             {
                 timerForGame.Stop();
                 SaveRecord();
-                ChangeToDefaultColorWithDelay();
-                MessageBox.Show("Ура");
+                //ChangeToDefaultColorWithDelay();
+                Form again = new PlayAgainForm(timerCount);
+                
+                if (!(again.ShowDialog()==DialogResult.Cancel))
+                {
+                    Shuffle();                 
+                    LoadToPictureBoxes();
+                    timerCount = 0;
+                    timerForGame.Start();
+                }
+                else
+                {
+                    Close();
+                }
             }
         }
 
         private void SaveRecord()
         {
-            Player player = new Player(name, surname, timerCount);
+            Player player = new Player(name, timerCount);
             InsertIntoDataBase(player);
         }
 
@@ -164,10 +181,9 @@ namespace FindACouple
                 using (SQLiteConnection con = new SQLiteConnection("Data Source=FindACouple.db;Version=3;"))
                 {
                     con.Open();
-                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Rating (name,surname,time ) VALUES " +
-                        "(@Name,@Surname,@Time )", con);
-                    cmd.Parameters.Add("@Name", DbType.String, 50).Value = player.Name;
-                    cmd.Parameters.Add("@Surname", DbType.String, 50).Value = player.Surname;
+                    SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Rating (name,time ) VALUES " +
+                        "(@Name,@Time )", con);
+                    cmd.Parameters.Add("@Name", DbType.String, 50).Value = player.Name;                   
                     cmd.Parameters.Add("@Time", DbType.Double).Value = player.Time;
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -182,28 +198,28 @@ namespace FindACouple
         private void GameForm_Load(object sender, EventArgs e)
         {
             LoadImageToList();
-            //Shuffle();
+            Shuffle();
             LoadToPictureBoxes();
         }
-        private void ChangeToDefaultColorWithDelay()//для красоты(необязательный метод)
-        {
-            Update();
-            Thread.Sleep(150);
-            loadPicture = new List<PictureBox>()
-            {
-                pictureBox1,pictureBox2,pictureBox3,pictureBox4,pictureBox5,pictureBox6,pictureBox7, pictureBox8, pictureBox9,
-                pictureBox10,pictureBox11,pictureBox12,pictureBox13, pictureBox14,pictureBox15, pictureBox16,pictureBox17,
-                pictureBox18, pictureBox19,pictureBox20,pictureBox21, pictureBox22,pictureBox23, pictureBox24, pictureBox25,
-                pictureBox26,  pictureBox27,pictureBox28,pictureBox29,pictureBox30, pictureBox31, pictureBox32,pictureBox33,
-                pictureBox34, pictureBox35,pictureBox36,
-            };
-            for (int i = 0; i < loadPicture.Count; i++)
-            {
-                loadPicture[i].BackColor = Color.Yellow;
-                Thread.Sleep(60);
-                Update();
-            }
-        }
+        //private void ChangeToDefaultColorWithDelay()//для красоты(необязательный метод)
+        //{
+        //    Update();
+        //    Thread.Sleep(150);
+        //    loadPicture = new List<PictureBox>()
+        //    {
+        //        pictureBox1,pictureBox2,pictureBox3,pictureBox4,pictureBox5,pictureBox6,pictureBox7, pictureBox8, pictureBox9,
+        //        pictureBox10,pictureBox11,pictureBox12,pictureBox13, pictureBox14,pictureBox15, pictureBox16,pictureBox17,
+        //        pictureBox18, pictureBox19,pictureBox20,pictureBox21, pictureBox22,pictureBox23, pictureBox24, pictureBox25,
+        //        pictureBox26,  pictureBox27,pictureBox28,pictureBox29,pictureBox30, pictureBox31, pictureBox32,pictureBox33,
+        //        pictureBox34, pictureBox35,pictureBox36,
+        //    };
+        //    for (int i = 0; i < loadPicture.Count; i++)
+        //    {
+        //        loadPicture[i].BackColor = Color.Yellow;
+        //        Thread.Sleep(60);
+        //        Update();
+        //    }
+        //}
         private void LoadImageToList()
         {
             try

@@ -1,0 +1,68 @@
+﻿using System.Data.SQLite;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace FindACouple
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+        private void OnTextBoxEnter(object sender, EventArgs e)
+        {
+            TextBox sndTextBox = sender as TextBox;
+            if (sndTextBox != null)
+            {
+                if (sndTextBox.Text.Equals((string)sndTextBox.Tag))
+                {
+                    sndTextBox.Text = "";
+                }
+                sndTextBox.ForeColor = Color.Black;
+            }
+        }
+        private void OnTextBoxLeave(object sender, EventArgs e)
+        {
+            TextBox sndTextBox = sender as TextBox;
+            if (sndTextBox != null)
+            {
+                if (sndTextBox.Text.Equals(""))
+                {
+                    sndTextBox.ForeColor = Color.Gray;
+                    sndTextBox.Text = (string)sndTextBox.Tag;
+                }
+            }
+        }
+
+        private void acceptButton_Click(object sender, EventArgs e)
+
+        {
+            //if (!nameTextBox.Text.Equals(nameTextBox.Tag) && 
+            //   (!nameTextBox.Text.Equals(""))&& 
+            //   (!surnameTextBox.Text.Equals(surnameTextBox.Tag))&&
+            //   (!surnameTextBox.Text.Equals("")))
+            {
+                Form gameForm = new GameForm(nameTextBox.Text,surnameTextBox.Text);
+                gameForm.Left = Left;
+                gameForm.Top = Top;
+                gameForm.Show();
+                Hide();
+            }
+            //else
+            //{
+            //    MessageBox.Show("Вы не ввели данные!", "Предупреждение");
+            //}
+        }
+
+        
+    }
+}
